@@ -1,0 +1,67 @@
+#!/usr/bin/env python3
+##
+## EPITECH PROJECT, 2022
+## hello 
+## File description:
+## hello 
+##
+
+from decimal import *
+import sys
+from math import *
+from array import array
+
+arg = sys.argv
+
+def display_h():
+    print("USAGE\n    /106bombyx n [k | i0 i1]\n")
+    print("DESCRIPTION")
+    print("    n    number of first generation individuals\n")
+    print("    k    growth rate from 1 to 4\n")
+    print("    i0   initial generation (included)\n")
+    print("    i1   final generation (included)\n")
+
+def trans_float(arg):
+    return float(arg)
+
+def array(tab):
+    tab = tab.split("*")
+    return (tab)
+
+def calc(tab, x):
+    result = 0
+    i = len(tab) - 1
+    while i >= 0:
+        result = (result * x) + trans_float(tab[i])
+        i -= 1
+    return (result)
+
+def start_help(len_t, argv, x, res):
+    for i in range(1, len_t, 2):
+        nbr_t = array(argv[i])
+        det_t = array(argv[i + 1])
+        n = calc(nbr_t, x)
+        d = calc(det_t, x)
+        if (n == d):
+            res *= 1
+        else:
+            res *= (trans_float(n) / trans_float(d))
+    print("%.3f -> %.5f" %(x, res))
+    return res
+
+def start(argv):
+    len_t = len(argv)
+    res = 1.0
+    x = 0.000
+
+    while x <= 1.00100:
+        res = start_help(len_t, argv, x, res)
+        x += 0.001
+        res = 1.0
+
+def main(args):
+    start(args)
+    return (0)
+
+if __name__ == '__main__':
+    main(arg)
